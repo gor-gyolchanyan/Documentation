@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:Documentation.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <FileRef
+      location = "group:LICENCE.txt">
+   </FileRef>
+   <FileRef
+      location = "group:Documentation.podspec"
+      assignedFileDataType = "public.ruby-script">
+   </FileRef>
+   <FileRef
+      location = "group:gitignore-keywords">
+   </FileRef>
+   <FileRef
+      location = "group:gitignore-prefix">
+   </FileRef>
+   <FileRef
+      location = "group:gitignore-suffix">
+   </FileRef>
+   <FileRef
+      location = "group:Documentation.xcworkspace/xcshareddata/IDETemplateMacros.plist">
+   </FileRef>
+</Workspace>
