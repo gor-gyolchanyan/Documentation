@@ -25,14 +25,41 @@
 // For more information, please refer to <http://unlicense.org/>
 //  
 
-// MARK: - AnyDocumented: CustomDebugStringConvertible
+// MARK: - AnyDocumentedExhaustiveCore
 
-extension AnyDocumented: CustomDebugStringConvertible { }
+@usableFromInline
+internal final class AnyDocumentedExhaustiveCore<Base>: AnyDocumented<Base.Title, Base.Summary, Base.Overview, Base.Explanation>.Core where Base: Documented {
 
-public extension AnyDocumented {
+	///
+	@inlinable
+	init(_ actualBase: Base) {
+		self.actualBase = actualBase
+	}
 
 	@inlinable
-	var debugDescription: String {
-		return String(reflecting: self.base)
+	deinit { }
+
+	///
+	@usableFromInline
+	var actualBase: Base
+
+	@inlinable
+	override var base: Any {
+		return self.actualBase
 	}
+
+	@inlinable
+	override var title: Base.Title { return self.actualBase.title }
+
+	@inlinable
+	override var summary: Base.Summary { return self.actualBase.summary }
+
+	@inlinable
+	override var overview: Base.Overview { return self.actualBase.overview }
+
+	@inlinable
+	override var explanation: Base.Explanation { return self.actualBase.explanation }
+
+	@inlinable
+	override func mutating() -> AnyDocumented<Base.Title, Base.Summary, Base.Overview, Base.Explanation>.Core { return AnyDocumentedExhaustiveCore(self.actualBase) }
 }

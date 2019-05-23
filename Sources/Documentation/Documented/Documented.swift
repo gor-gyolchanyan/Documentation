@@ -28,7 +28,7 @@
 // MARK: - Documented
 
 /// Something that has a human-consumable description.
-public protocol Documented: CustomStringConvertible {
+public protocol Documented {
 
 	/// The type of `self.title`.
 	associatedtype Title

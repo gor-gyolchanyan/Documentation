@@ -27,11 +27,62 @@
 
 //MARK: - AnyDocument (Documented)
 
+public extension AnyDocumented where Summary == Void, Overview == Void, Explanation == Void {
+
+	///
+	@inlinable
+	init<Base>(terse base: Base) where Base: Documented, Base.Title == Title {
+		self.init(core: AnyDocumentedTerseCore(base))
+	}
+
+	///
+	@inlinable
+	init<Base>(_ base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Void, Base.Overview == Void, Base.Explanation == Void {
+		self.init(terse: base)
+	}
+}
+
+public extension AnyDocumented where Overview == Void, Explanation == Void {
+
+	///
+	@inlinable
+	init<Base>(concise base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Summary {
+		self.init(core: AnyDocumentedConciseCore(base))
+	}
+
+	///
+	@inlinable
+	init<Base>(_ base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Summary, Base.Overview == Void, Base.Explanation == Void {
+		self.init(concise: base)
+	}
+}
+
+public extension AnyDocumented where Explanation == Void {
+
+	///
+	@inlinable
+	init<Base>(thorough base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Summary, Base.Overview == Overview {
+		self.init(core: AnyDocumentedThoroughCore(base))
+	}
+
+	///
+	@inlinable
+	init<Base>(_ base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Summary, Base.Overview == Overview, Base.Explanation == Void {
+		self.init(thorough: base)
+	}
+}
+
 public extension AnyDocumented {
 
 	///
 	@inlinable
+	init<Base>(exhaustive base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Summary, Base.Overview == Overview, Base.Explanation == Explanation {
+		self.init(core: AnyDocumentedExhaustiveCore(base))
+	}
+
+	///
+	@inlinable
 	init<Base>(_ base: Base) where Base: Documented, Base.Title == Title, Base.Summary == Summary, Base.Overview == Overview, Base.Explanation == Explanation {
-		self.init(core: AnyDocumentedDefaultCore(base))
+		self.init(exhaustive: base)
 	}
 }

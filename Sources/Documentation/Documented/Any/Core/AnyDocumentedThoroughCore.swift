@@ -25,10 +25,10 @@
 // For more information, please refer to <http://unlicense.org/>
 //  
 
-// MARK: - AnyDocumentedDefaultCore
+// MARK: - AnyDocumentedThoroughCore
 
 @usableFromInline
-internal final class AnyDocumentedDefaultCore<Base>: AnyDocumented<Base.Title, Base.Summary, Base.Overview, Base.Explanation>.Core where Base: Documented {
+internal final class AnyDocumentedThoroughCore<Base>: AnyDocumented<Base.Title, Base.Summary, Base.Overview, Void>.Core where Base: Documented {
 
 	///
 	@inlinable
@@ -58,8 +58,8 @@ internal final class AnyDocumentedDefaultCore<Base>: AnyDocumented<Base.Title, B
 	override var overview: Base.Overview { return self.actualBase.overview }
 
 	@inlinable
-	override var explanation: Base.Explanation { return self.actualBase.explanation }
+	override var explanation: Void { return () }
 
 	@inlinable
-	override func mutating() -> AnyDocumented<Base.Title, Base.Summary, Base.Overview, Base.Explanation>.Core { return AnyDocumentedDefaultCore(self.actualBase) }
+	override func mutating() -> AnyDocumented<Base.Title, Base.Summary, Base.Overview, Void>.Core { return AnyDocumentedThoroughCore(self.actualBase) }
 }

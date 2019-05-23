@@ -50,17 +50,3 @@ public extension Documented where Explanation == Void {
 	@inlinable
 	var explanation: Explanation { return () }
 }
-
-public extension Documented {
-
-	@inlinable
-	var description: String {
-		let fields = [
-			self.title is Void ? nil : "title: \(String(reflecting: self.title))",
-			self.summary is Void ? nil : "summary: \(String(reflecting: self.summary))",
-			self.overview is Void ? nil : "overview: \(String(reflecting: self.overview))",
-			self.explanation is Void ? nil : "explanation: \(String(reflecting: self.explanation))"
-		].compactMap { $0 }.joined(separator: ", ")
-		return "(\(fields))"
-	}
-}

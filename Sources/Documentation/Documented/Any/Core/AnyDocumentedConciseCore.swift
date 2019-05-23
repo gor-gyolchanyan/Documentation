@@ -25,20 +25,41 @@
 // For more information, please refer to <http://unlicense.org/>
 //  
 
-// MARK: - AnyDocumented: CustomStringConvertible
+// MARK: - AnyDocumentedConciseCore
 
-extension AnyDocumented: CustomStringConvertible { }
+@usableFromInline
+internal final class AnyDocumentedConciseCore<Base>: AnyDocumented<Base.Title, Base.Summary, Void, Void>.Core where Base: Documented {
 
-public extension AnyDocumented {
+	///
+	@inlinable
+	init(_ actualBase: Base) {
+		self.actualBase = actualBase
+	}
 
 	@inlinable
-	var description: String {
-		let fields = [
-			self.title is Void ? nil : "title: \(String(reflecting: self.title))",
-			self.summary is Void ? nil : "summary: \(String(reflecting: self.summary))",
-			self.overview is Void ? nil : "overview: \(String(reflecting: self.overview))",
-			self.explanation is Void ? nil : "explanation: \(String(reflecting: self.explanation))"
-			].compactMap { $0 }.joined(separator: ", ")
-		return "(\(fields))"
+	deinit { }
+
+	///
+	@usableFromInline
+	var actualBase: Base
+
+	@inlinable
+	override var base: Any {
+		return self.actualBase
 	}
+
+	@inlinable
+	override var title: Base.Title { return self.actualBase.title }
+
+	@inlinable
+	override var summary: Base.Summary { return self.actualBase.summary }
+
+	@inlinable
+	override var overview: Void { return () }
+
+	@inlinable
+	override var explanation: Void { return () }
+
+	@inlinable
+	override func mutating() -> AnyDocumented<Base.Title, Base.Summary, Void, Void>.Core { return AnyDocumentedConciseCore(self.actualBase) }
 }
