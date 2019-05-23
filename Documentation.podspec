@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
 	spec.name                       = "Documentation"
-	spec.version                    = "0.0.1"
+	spec.version                    = "0.0.2"
 	
 	spec.summary                    = "Documentation framework for Swift."
 	spec.description                = <<-DESC
